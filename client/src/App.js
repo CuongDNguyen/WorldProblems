@@ -1,12 +1,23 @@
-import React from 'react';
-import SignInSide from './pages/SignInSide.js'
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+
+import React from "react";
+import NavBar from "./components/NavBar";
+import { useAuth0 } from "./react-auth0-spa";
 
 function App() {
+  const { loading } = useAuth0();
+
+  if (loading) {
+    return (
+      <div>Loading...</div>
+    );
+  }
+
   return (
-    <div>
-      <SignInSide />
+    <div className="App">
+      <header>
+        <NavBar />
+      </header>
     </div>
   );
 }
