@@ -56,7 +56,6 @@ const strategy = new Auth0Strategy(
     done(null, user);
   });
 
-// app.js
 
 const userInViews = require('./lib/middleware/userInViews');
 const authRouter = require('./routes/auth');
@@ -68,6 +67,9 @@ app.use(userInViews());
 app.use('/', authRouter);
 app.use('/', indexRouter);
 app.use('/', usersRouter);
+require("./routes/problems")(app);
+require("./routes/authors")(app);
+require("./routes/solutions")(app);
 // ..
 
 const syncOptions = { force: true }
