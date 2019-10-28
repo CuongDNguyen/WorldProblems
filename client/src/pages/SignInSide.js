@@ -2,28 +2,13 @@ import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { useAuth0 } from "../react-auth0-spa";
-
-function Copyright() {
-    
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        World Problems
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -89,10 +74,13 @@ export default function SignInSide() {
       )}
 
       {isAuthenticated && <Button onClick={() => logout()}>Log out</Button>}
+      {isAuthenticated && (
+      <span>
+        <Link to="/">Home</Link>&nbsp;
+        <Link to="/profile">Profile</Link>
+      </span>
+    )}
     </div>
-            <Box mt={5}>
-              <Copyright />
-            </Box>
           </form>
         </div>
       </Grid>
