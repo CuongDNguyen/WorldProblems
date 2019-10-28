@@ -6,6 +6,7 @@ import SignInSide from "./pages/SignInSide";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Profile from "./components/Profile";
 import PrivateRoute from "./components/PrivateRoute";
+import ProblemsPage from "./pages/ProblemsPage";
 
 function App() {
   const { loading } = useAuth0();
@@ -26,6 +27,7 @@ function App() {
         <Switch>
           <Route path="/" exact />
           <PrivateRoute path="/profile" component={Profile} />
+          <PrivateRoute path="/problems" component={ProblemsPage} />
         </Switch>
       </BrowserRouter>
     </div>

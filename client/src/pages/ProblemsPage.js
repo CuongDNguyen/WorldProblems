@@ -4,10 +4,19 @@ import API from '../utils/API';
 
 export default class ProblemsPage extends Component {
 
+    state = {
+        problems: []
+    }
+
     componentDidMount() {
         API.getAllProblems()
         .then( (response) => {
             console.log('response: ', response)
+            this.setState({
+                problems: response
+            }, () => {
+                console.log('problems: ', this.state.problems);
+            })
         })
         .catch( (err) => {
             console.log('errors: ', err)
@@ -24,7 +33,11 @@ export default class ProblemsPage extends Component {
         }
       
         return(
-            <div></div>
+            <div>
+                {
+                    this.state.problems
+                }
+            </div>
         )
     }
 }
