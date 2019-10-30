@@ -1,33 +1,20 @@
 // src/App.js
 
 import React from "react";
-import { useAuth0 } from "./react-auth0-spa";
-import SignInSide from "./pages/SignInSide";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Profile from "./components/Profile";
-import PrivateRoute from "./components/PrivateRoute";
 import ProblemsPage from "./pages/ProblemsPage";
+import Problem from "./components/FunctionalProblem";
 
 function App() {
-  const { loading } = useAuth0();
-
-  if (loading) {
-    return (
-      <div>Loading...</div>
-    );
-  }
 
   return (
 <div className="App">
       {/* New - use BrowserRouter to provide access to /profile */}
       <BrowserRouter>
-        <header>
-          <SignInSide />
-        </header>
         <Switch>
-          <Route path="/" exact />
-          <PrivateRoute path="/profile" component={Profile} />
-          <PrivateRoute path="/problems" component={ProblemsPage} />
+          <Route path="/" exact component={Problem}/>
+          <Route path="/problem" component={Problem} />
+          <Route path="/problems" component={ProblemsPage} />
         </Switch>
       </BrowserRouter>
     </div>

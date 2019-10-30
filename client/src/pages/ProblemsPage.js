@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { useAuth0 } from '../react-auth0-spa';
+import Problem from '../components/Problem';
+import PostProblem from '../components/PostProblem';
 import API from '../utils/API';
 
 export default class ProblemsPage extends Component {
@@ -24,19 +25,17 @@ export default class ProblemsPage extends Component {
     }
     
     render() {
-        const { loading, user } = useAuth0();
 
-        if (loading || !user) {
-          return (
-            <div>Loading...</div>
-          );
-        }
-      
         return(
             <div>
                 {
-                    this.state.problems
+            //         this.state.problems.map( (problem) => {
+            //             <Problem problemTitle={problem.text}/>
+            //         })
                 }
+                <Problem problemTitle="Building this website"/>
+                <Problem problemTitle="Learning Material UI"/>
+                <PostProblem />
             </div>
         )
     }
