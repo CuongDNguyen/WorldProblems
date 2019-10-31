@@ -1,6 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
   var Problem = sequelize.define("Problem", {
-    text: DataTypes.STRING,
+    title: DataTypes.STRING,
     description: DataTypes.TEXT
   });
   Problem.associate = function(models) {

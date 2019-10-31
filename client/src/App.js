@@ -3,7 +3,7 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ProblemsPage from "./pages/ProblemsPage";
-import Problem from "./components/FunctionalProblem";
+import Problem from "./components/Problem";
 
 function App() {
 
