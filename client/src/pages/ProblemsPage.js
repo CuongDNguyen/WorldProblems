@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Problem from '../components/Problem';
 import PostProblem from '../components/PostProblem';
 import { List, ListItem } from '@material-ui/core';
+import ProblemList from '../components/ProblemList';
 import API from '../utils/API';
 
 export default class ProblemsPage extends Component {

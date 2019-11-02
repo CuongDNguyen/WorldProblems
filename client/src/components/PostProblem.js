@@ -1,16 +1,25 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import { addPost } from '../actions/index';
 import { Button, TextField, Input, Grid } from '@material-ui/core';
 import API from '../utils/API';
+
+function mapDispatchToProps(dispatch) {
+    return {
+        addPost: post => dispatch(addPost(post))
+    }
+}
 
 class PostProblem extends Component {
     constructor(props) {
         super(props)
 
-        this.handleClick = this.handleClick.bind(this);
         this.state = {
             title: "",
             description: ""
         }
+        this.handleClick = this.handleClick.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleClick() {
@@ -27,8 +36,16 @@ class PostProblem extends Component {
         }).catch();
     }
 
+    handleSubmit(event) {
+        const title = document.querySelector("#title").value || "No title provided";
+        const description = document.querySelector("#description").value || "No description provided";
+        event.preventDefault();
+        this.props.addPost({ title: title, description: description });
+    }
+
     render() {
         return (
+            <Fragment>
                 <Grid container direction="column">
                     <Grid item xs={4}>
                         <TextField placeholder="Problem title" id="problemTitle" />
@@ -40,8 +57,22 @@ class PostProblem extends Component {
                     </Button>
                     </Grid>
                 </Grid>
+
+                <h3>New Redux Form Test</h3>
+                <form onSubmit={this.handleSubmit}>
+                    <div>
+                        <label>Title</label>
+                        <input type="text" id="title" placeholder="Post title"></input>
+                        <label>Description</label>
+                        <input type="text" id="description" placeholder="Post description"></input>
+                    </div>
+                    <button type="submit">Save Post</button>
+                </form>
+            </Fragment>
         )
     }
 }
 
-export default PostProblem;
+const ConnectedPostProblem = connect(null, mapDispatchToProps) (PostProblem)
+
+export default ConnectedPostProblem;
