@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { addPost } from '../actions/index';
-import { Button, TextField, Input, Grid } from '@material-ui/core';
+// import { addPost } from '../actions/index';
+import { Button, TextField, Input } from '@material-ui/core';
 import API from '../utils/API';
 
 function mapDispatchToProps(dispatch) {
     return {
-        addPost: post => dispatch(addPost(post))
+        // addPost: post => dispatch(addPost(post))
     }
 }
 
@@ -31,33 +31,26 @@ class PostProblem extends Component {
         }, () => {
             console.log("state: ", this.state);
         })
-        API.createNewProblem("Cuong", problemTitle, problemDescription).then( (res) => {
+        API.createNewProblem("Cuong", problemTitle, problemDescription).then((res) => {
             console.log("Response: ", res)
         }).catch();
     }
 
     handleSubmit(event) {
-        const title = document.querySelector("#title").value || "No title provided";
-        const description = document.querySelector("#description").value || "No description provided";
-        event.preventDefault();
-        this.props.addPost({ title: title, description: description });
+        // const title = document.querySelector("#title").value || "No title provided";
+        // const description = document.querySelector("#description").value || "No description provided";
+        // event.preventDefault();
+        // this.props.addPost({ title: title, description: description });
     }
 
     render() {
         return (
             <Fragment>
-                <Grid container direction="column">
-                    <Grid item xs={4}>
-                        <TextField placeholder="Problem title" id="problemTitle" />
-                    </Grid>
-                    <Grid item xs={4}>
-                    <Input fullWidth id="problemDescription" />
-                    <Button size="small" onClick={this.handleClick}>
-                        Post
-                    </Button>
-                    </Grid>
-                </Grid>
-
+                <TextField placeholder="Problem title" id="problemTitle" />
+                <Input fullWidth id="problemDescription" />
+                <Button size="small" onClick={this.handleClick}>
+                    Post
+                </Button>
                 <h3>New Redux Form Test</h3>
                 <form onSubmit={this.handleSubmit}>
                     <div>
@@ -73,6 +66,6 @@ class PostProblem extends Component {
     }
 }
 
-const ConnectedPostProblem = connect(null, mapDispatchToProps) (PostProblem)
+const ConnectedPostProblem = connect(null, mapDispatchToProps)(PostProblem)
 
 export default ConnectedPostProblem;

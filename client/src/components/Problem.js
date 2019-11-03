@@ -1,27 +1,43 @@
-import React, { Component } from 'react';
-import { Grid, Paper, Typography } from '@material-ui/core'
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import { getAllProblems } from '../actions/index';
 
 class Problem extends Component {
-    constructor(props) {
-        super(props);
+    
+    componentDidMount() {
+        this.getProblems();
     }
 
-    render() {
-        return (
-            <Grid container>
-                <Grid direction="column" container>
-                    <Grid direction="row" container>
-                        <Paper component="div">
-                            <Typography component="h3">
-                                    {this.props.problemTitle}
-                            </Typography>
-                        </Paper>
-                    </Grid>
-                </Grid>
-            </Grid>
-        )
+    getProblems() {
+         this.props.getAllProblems();
+         console.log('posts: ', this.props.posts[0])
     }
-
+    render() {    
+        return this.props.posts.length ? (
+            <Fragment>
+                <ul>
+                {
+                    this.props.posts.map( postData => ( 
+                        postData.data.map(post => {
+                            console.log('real post: ', post)
+                            return (
+                                <li key={post.id}>
+                                    <h3>{post.title}</h3>
+                                    <p>{post.description}</p>
+                                </li>
+                        )
+                        })
+                    ))
+                }
+                </ul>
+            </Fragment>
+        ) : <h1>Loading...</h1>
+    }
 }
 
-export default Problem;
+function mapStateToProps(state) {
+    return {
+        posts: state.posts
+    }
+}
+export default connect(mapStateToProps, { getAllProblems })(Problem);

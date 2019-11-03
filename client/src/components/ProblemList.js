@@ -5,17 +5,22 @@ const mapStateToProps = state => {
     return { posts: state.posts };
 };
 
-const ConnectedProblemList = ({ posts }) => (
+const ConnectedProblemList = ({ posts }) => {
+    console.log("connectedProblemList: posts: ", posts)
+    return (
     <ul>
-        {posts.map(post => (
-            <li key={post.id}>
-                <h4>Title: {post.title}</h4>
-                <p>Description: {post.description}</p>
-            </li>
-            
-        ))}
+        {
+            posts.map(postData => {
+                postData.data.map(post => (
+                    <li key={post.id}>
+                        <h4>{post.title}</h4>
+                        <p>{post.description}</p>
+                    </li>
+                ))
+            })
+        }
     </ul>
-)
+)}
 
 const ProblemList = connect(mapStateToProps) (ConnectedProblemList);
 
